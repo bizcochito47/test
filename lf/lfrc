@@ -1,0 +1,24 @@
+set hidden
+set number
+set relativenumber
+set shell zsh
+set drawbox
+set nopreview
+set ratios 1
+set info size:time
+set icons
+
+cmd mkdir %{{
+    printf "Make directory: "
+    read ans
+    mkdir $ans
+}}
+map md mkdir
+
+cmd touch %{{ 
+    printf "Create file: " 
+    read ans 
+    touch $ans 
+}}
+map tf touch
+

@@ -1,0 +1,44 @@
+#! /bin/sh
+
+# stuff that doesn't work normally idk why
+bash $HOME/.config/bspwm/.fehbg
+bash $HOME/.config/bspwm/.picom
+bash $HOME/.config/bspwm/.startup
+
+xrandr --output HDMI-0 --mode 1920x1080 --rate 144.00
+
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+bspc monitor -d 1 2 3 4 5
+
+bspc config border_width         3
+bspc config window_gap           10
+bspc config split_ratio          0.50
+
+bspc config focused_border_color "#ff7a93"
+bspc config normal_border_color "#32344a"
+bspc config active_border_color "#444b6a"
+
+bspc config borderless_monocle   true
+bspc config gapless_monocle      true
+bspc config paddingless_monocle true
+bspc config single_monocle false
+bspc config focus_follows_pointer true
+
+# fix pointer
+xsetroot -cursor_name left_ptr
+
+# floating windows
+declare -a floats=(Alafloat Lxappearance Arandr \
+Viewnior Pcmanfm feh Nm-connection-editor Matplotlib Yad)
+for i in ${floats[@]}; do
+  bspc rule -a $i state=floating follow=on focus=on; done
+
+## Autostart
+
+# Kill if already running
+# killall -q 
+
+$HOME/.config/polybar/launch.sh
+
+sxhkd &
